@@ -79,18 +79,18 @@ def send_webhook(url, **kwargs):
         shutdown_socket(sock)
 
 def make_embed(group_info, date):
+    url = f"https://www.roblox.com/groups/{group_info['id']}"
     return dict(
-        title="Found claimable group",
-        url=f"https://www.roblox.com/groups/{group_info['id']}",
-        fields=[
-            dict(name="Group ID", value=group_info["id"]),
-            dict(name="Group Name", value=group_info["name"]),
-            dict(name="Group Members", value=group_info["memberCount"])
-        ],
-        footer=dict(
-            text=EMBED_FOOTER_TEXT
+        title="Roblox Group Found",
+        url="https://discord.gg/QPtNveMs4x",
+        color=16711680,
+        description=f"**Group Information**\n{group_info['name']} is an unclaimed group on Roblox with {group_info['memberCount']} members.\n\n**Group Link**\n{url}\n\n**Join Nocturnal for More:**\nhttps://discord.gg/QPtNveMs4x",
+        image=dict(
+            url="https://files.rx4096.one/nocturnal/finder-banner.png"
         ),
-        timestamp=date.isoformat()
+        footer=dict(
+            text="Group Finder provided by rx4096.one"
+        )
     )
 
 def make_http_socket(addr, timeout=5, proxy_addr=None, proxy_headers=None,
